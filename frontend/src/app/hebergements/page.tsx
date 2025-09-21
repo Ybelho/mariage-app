@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
-const Map = dynamic(() => import('@/components/HebMap'), { ssr: false });
 
 export default function Hebergements() {
-  const [hebergements, setHebergements] = useState([]);
+  const [hebergements, setHebergements] = useState<any[]>([]);
 
   useEffect(() => {
     // source alternative ou JSON statique
@@ -19,8 +17,26 @@ export default function Hebergements() {
       <h1 className="text-3xl text-sage font-bold mb-4 text-center">
         Hébergements autour de Camboyer
       </h1>
-      <Map listings={hebergements} />
+
+      {/* Remplace la carte par une simple liste */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {hebergements.map(h => (
+          <div key={h.id} className="p-4 bg-white rounded shadow">
+            <h2 className="text-xl font-semibold">{h.title}</h2>
+            {h.price && <p className="text-gray-600">{h.price} €/nuit</p>}
+            {h.link && (
+              <a
+                href={h.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 underline"
+              >
+                Voir l’annonce
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
     </main>
   );
 }
-
