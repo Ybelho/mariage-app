@@ -1,0 +1,112 @@
+/* ---- WRAPPER (clair) ---- */
+.page { background: #ffffff; }
+
+/* Top spacing assuré par --nav-h via layout */
+.wrap { width:min(700px, 94vw); margin: 0 auto; padding: 28px 0 60px; }
+
+/* ---- BARRE STORIES ---- */
+.stories {
+  display:flex; gap:14px; padding:12px 10px; overflow-x:auto;
+  background:#ffffff; border:1px solid #e6e6e6;
+  border-radius:14px; margin-bottom:16px;
+}
+.story {
+  width:70px; min-width:70px; height:70px; border-radius:50%;
+  background: linear-gradient(135deg,#f15a84,#f4891f); padding:2px;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+.storyInner{
+  width:100%; height:100%; border-radius:50%; border:2px solid #ffffff;
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+  background:#ffffff; color:#222; font-weight:700; letter-spacing:.04em;
+}
+
+/* ---- UPLOADER ---- */
+.upload {
+  background:#ffffff; border:1px solid #e6e6e6;
+  border-radius:14px; padding:12px; margin:14px 0; display:flex; gap:10px;
+}
+.input, .file {
+  flex:1; border:1px solid #d7d7d7; background:#ffffff;
+  color:#222; padding:10px 12px; border-radius:10px; outline:none;
+}
+.btn {
+  background:#d81b60; color:#fff; border:none; border-radius:999px;
+  font-weight:700; padding:10px 16px; cursor:pointer;
+}
+.btn:disabled{ opacity:.5; cursor:not-allowed; }
+
+/* ---- POST (CARD) ---- */
+.card {
+  background:#ffffff; border:1px solid #e6e6e6;
+  border-radius:14px; overflow:hidden; margin:18px 0; box-shadow:0 8px 28px rgba(0,0,0,.08);
+}
+.top { padding:12px 14px; display:flex; align-items:center; justify-content:space-between; }
+.user { display:flex; align-items:center; gap:10px; }
+.avatarRing{
+  width:34px; height:34px; border-radius:50%; background: linear-gradient(135deg,#f15a84,#f4891f);
+  padding:2px; display:flex; align-items:center; justify-content:center;
+}
+.avatarInner{
+  width:100%; height:100%; border-radius:50%; background:#ffffff; border:2px solid #ffffff;
+  color:#222; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;
+}
+.username{ font-weight:700; color:#222; }
+.dot{ color:#777; }
+
+.media { position:relative; width:100%; aspect-ratio:3/2; background:#f6f6f6; }
+.img { object-fit:cover; }
+
+.bottom { padding:10px 14px 14px; }
+.actions{ display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+.link, .heart { color:#333; text-decoration:none; font-weight:700; }
+.heart { cursor:pointer; }
+.likes{ color:#222; font-weight:600; margin:4px 0; }
+.caption{ color:#666; margin: 6px 0 2px; }
+.commentsWrap{ margin-top:6px; display:grid; gap:4px; }
+.comment{ color:#222; }
+.smallMuted{ color:#666; font-size:12px; }
+
+.add{
+  margin-top:8px; padding-top:8px; border-top:1px solid #e9e9e9;
+  display:flex; gap:8px;
+}
+.addInput{
+  flex:1; background:transparent; border:none; outline:none; color:#222;
+}
+.postBtn{ background:none; border:none; color:#1d92ff; font-weight:700; cursor:pointer; }
+.empty{ text-align:center; color:#666; margin-top:10px; }
+
+
+/* barre des stories */
+.stories {
+  display:flex; gap:14px; padding:12px 10px; overflow-x:auto;
+  background: #161819; border:1px solid rgba(255,255,255,.06);
+  border-radius: 14px; margin-bottom:16px;
+}
+.story {
+  width:70px; min-width:70px;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  cursor:pointer;
+}
+.storyRing {
+  width:70px; height:70px; border-radius:50%;
+  background: linear-gradient(135deg,#f15a84,#f4891f); padding:2px;
+  display:flex; align-items:center; justify-content:center;
+}
+.storyInner{
+  width:100%; height:100%; border-radius:50%; border:2px solid #0f1011;
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+  background:#0f1011; color:#e7eaed; font-weight:700; letter-spacing:.04em;
+}
+.storyName {
+  color:#e7eaed; font-size:12px; text-align:center; max-width:72px;
+  overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
+}
+
+/* bouton download-all (style simple) */
+.downloadAll {
+  margin: 10px 0 0; display:inline-block;
+  font-weight:600; text-decoration:none; border:1px solid rgba(255,255,255,.2);
+  padding:8px 12px; border-radius:999px; color:#e7eaed;
+}

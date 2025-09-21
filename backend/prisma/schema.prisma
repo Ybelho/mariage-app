@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"         // ou "postgresql" selon ton setup
+  url      = env("DATABASE_URL")
+}
+
+model Photo {
+  id           Int        @id @default(autoincrement())
+  nom          String
+  url          String
+  createdAt    DateTime   @default(now())
+  comments     Comment[]
+  likes        Like[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
+  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  photoId   Int
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  photoId   Int
+  session   String   // identifiant de session (cookie "sid")
+  createdAt DateTime @default(now())
+
+  @@unique([photoId, session]) // empêche le double-like pour une même session
+}
+
+model Trajet {
+  id        Int         @id @default(autoincrement())
+  nom       String
+  prenom    String
+  depart    String
+  arrivee   String
+  places    Int
+  createdAt DateTime    @default(now())
+  passagers Passenger[]
+}
+
+model Passenger {
+  id        Int      @id @default(autoincrement())
+  nom       String
+  prenom    String
+  trajet    Trajet   @relation(fields: [trajetId], references: [id], onDelete: Cascade)
+  trajetId  Int
+  createdAt DateTime @default(now())
+}
