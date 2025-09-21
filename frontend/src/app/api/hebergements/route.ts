@@ -1,17 +1,30 @@
+// src/app/api/hebergements/route.ts
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const lat = searchParams.get("lat") || "42.9";
-  const lng = searchParams.get("lng") || "1.5";
-  const radiusKm = searchParams.get("radiusKm") || "10"; // rayon (km)
 
-  // OpenDataSoft: dataset air-bnb-listings
+  const lat = searchParams.get("lat") ?? "42.9";
+  const lng = searchParams.get("lng") ?? "1.5";
+
+  // radiusKm arrive en string -> on parse en nombre et on borne
+  const radiusKmRaw = searchParams.get("radiusKm");
+  const radiusKm = Math.max(
+    0.1,
+    Math.min(50, Number.parseFloat(radiusKmRaw ?? "10") || 10)
+  );
+  const radiusMeters = Math.round(radiusKm * 1000);
+
   const apiUrl =
-    `https://public.opendatasoft.com/api/records/1.0/search/?dataset=air-bnb-listings` +
-    `&rows=100&geofilter.distance=${lat},${lng},${radiusKm*1000}`;
+    "https://public.opendatasoft.com/api/records/1.0/search/?" +
+    new URLSearchParams({
+      dataset: "air-bnb-listings",
+      rows: "100",
+      // format attendu: lat,lng,radius_en_mètres
+      "geofilter.distance": `${lat},${lng},${radiusMeters}`,
+    }).toString();
 
-  const res = await fetch(apiUrl);
+  const res = await fetch(apiUrl, { cache: "no-store" });
   if (!res.ok) return NextResponse.json([], { status: 200 });
 
   const json = await res.json();
